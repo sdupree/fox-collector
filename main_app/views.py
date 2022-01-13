@@ -15,3 +15,6 @@ def foxes_index(request):
   foxes = Fox.objects.all()
   return render(request, 'foxes/index.html', { 'foxes': foxes })
 
+def foxes_detail(request, fox_id):
+  fox = Fox.objects.get(id=fox_id)
+  return render(request, 'foxes/detail.html', { 'fox': fox })
