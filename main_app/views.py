@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Fox
 
 # Create your views here.
@@ -18,3 +19,16 @@ def foxes_index(request):
 def foxes_detail(request, fox_id):
   fox = Fox.objects.get(id=fox_id)
   return render(request, 'foxes/detail.html', { 'fox': fox })
+
+
+class FoxCreate(CreateView):
+  model = Fox
+  fields = ['name', 'species', 'description', 'age']
+
+class FoxUpdate(UpdateView):
+  model = Fox
+  fields = ['species', 'description', 'age']  # Omit 'name' to prevent updating.
+
+class FoxDelete(DeleteView):
+  model = Fox
+  success_url = '/foxes/'
