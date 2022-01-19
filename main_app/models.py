@@ -1,7 +1,13 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
-# Create your models here.
+MEALS = (
+  ('B', 'Breakfast'),
+  ('L', 'Lunch'),
+  ('D', 'Dinner')
+)
+
 class Fox(models.Model):
   name = models.CharField(max_length=20)
   species = models.CharField(max_length=20)
@@ -11,3 +17,19 @@ class Fox(models.Model):
     return self.name
   def get_absolute_url(self):
     return reverse('foxes_detail', kwargs={'fox_id': self.id})
+
+class Feeding(models.Model):
+  date = models.DateField('Feeding Date')
+  meal = models.CharField(
+    max_length=1,
+    choices=MEALS,
+    default=MEALS[0][0]
+  )
+  # create a fox_id column in the db
+  fox = models.ForeignKey(Fox, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"{self.get_meal_display()} on {self.date}"
+
+  class Meta:
+    ordering = ['-date']

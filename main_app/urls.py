@@ -9,4 +9,5 @@ urlpatterns = [
   path('foxes/create/', views.FoxCreate.as_view(), name='foxes_create'),
   path('foxes/<int:pk>/update/', views.FoxUpdate.as_view(), name='foxes_update'),
   path('foxes/<int:pk>/delete/', views.FoxDelete.as_view(), name='foxes_delete'),
+  path('foxes/<int:fox_id>/add_feeding/', views.add_feeding, name='add_feeding'),
 ]
