@@ -4,10 +4,10 @@
 <h1>Fox List</h1>
 
 {% for fox in foxes %}
-  <div class="card">
+  <div class="card blue-grey darken-1">
     <a href="{% url 'foxes_detail' fox.id %}">
-      <div class="card-content">
-        <span class="card-title">{{ fox.name }}</span>
+      <div class="card-content cyan-text text-lighten-4">
+        <span class="card-title cyan-text text-lighten-2">{{ fox.name }}</span>
         <p>Species: {{ fox.species }}</p>
         <p>Description: {{ fox.description }}</p>
         {% if fox.age > 0 %}
